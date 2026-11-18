@@ -13,6 +13,8 @@
 		<label for="pass">Contraseña: </label>
 		<input type="text" name="pass" th:field="*{pass}">
 		<br>
+		<p th:if="${#fields.hasErrors('pass')" th:errors="*{pass}"></p>
+		<p th:if="${#fields.hasErrors('nick')" th:errors="*{nick}"></p>
 		<br>
 		<button type="submit">Enviar</button>
 	</form>

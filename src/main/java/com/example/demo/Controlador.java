@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @SpringBootApplication
@@ -18,11 +19,21 @@ public class Controlador {
 	}
 	
 	
-	
 	@GetMapping("/login")
-	public String login(Model model, Usuario usuario, BindingResult bindingResult) {
+	public String login(Model model) {
+		Usuario usuario = new Usuario();
 		model.addAttribute("usuario", usuario);
 		return "login";
+	}
+	@PostMapping("/login")
+	public String postLogin(Model model, Usuario usuario, BindingResult br) {
+		if (br.hasErrors()) return "login"; 
+		Usuarios usuarios = new Usuarios();
+		usuario.setAutenticado(usuarios.contraseñaCorrecta(usuario.getNick(), usuario.getPass()));
+		if (usuario.isAutenticado()) return "index";
+
+		return "login";
+		
 	}
 	@GetMapping("/")
 	public String inicio(Model model, Usuario usuario, BindingResult bindingResult) {

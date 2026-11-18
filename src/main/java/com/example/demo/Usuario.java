@@ -16,6 +16,9 @@ public class Usuario {
 		this.nick = nick;
 		this.pass = pass;
 	}
+	public Usuario() {
+
+	}
 	
 	public String getNick() {
 		return nick;
