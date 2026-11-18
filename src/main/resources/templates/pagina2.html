@@ -1,0 +1,12 @@
+<html>
+	<head>
+		<title>Página 2</title>
+	</head>
+	<body th:object="${usuario}">
+		<h1 th:text="|Bienvenido, *{nick}|"></h1>
+		<h2>Estás en la página 2</h2>
+		<h3>Usuario autenticado</h3>
+		<a href="/pagina1">Ir a la página 1</a>
+		<a href="/logout">Cerrar sesión</a>
+	</body>
+</html>

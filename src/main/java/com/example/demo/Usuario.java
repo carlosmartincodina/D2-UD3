@@ -4,11 +4,10 @@ import jakarta.validation.constraints.NotEmpty;
 
 public class Usuario {
 
-	@NotEmpty
 	private String nick;
-	@NotEmpty
 	private String pass;
 	private boolean autenticado;
+	private int contador;
 	
 	
 	
@@ -17,7 +16,7 @@ public class Usuario {
 		this.pass = pass;
 	}
 	public Usuario() {
-
+		this.contador = 0;
 	}
 	
 	public String getNick() {
@@ -37,6 +36,12 @@ public class Usuario {
 	}
 	public void setAutenticado(boolean autenticado) {
 		this.autenticado = autenticado;
+	}
+	public int getContador() {
+		return contador;
+	}
+	public void setContador(int contador) {
+		this.contador = contador;
 	}
 	
 }

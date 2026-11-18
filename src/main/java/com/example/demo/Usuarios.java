@@ -13,7 +13,7 @@ public class Usuarios {
 		usuarios.add(new Usuario("Paco", "$2a$12$VRdAA0Nr49NLhTX1ZPT91elBXoR4CCvPsVHAaeNpKwNmwujEzvmo6"));
 		usuarios.add(new Usuario("María", "$2a$12$Grj78KYCnhUBial/p8ScCeWQWuimUIZjZUXcEqK8BuEkyf6/8uZq."));
 		usuarios.add(new Usuario("Carlos", "$2a$12$sOv.OJojW13bBRheJdPAVeMMDTpxd657r.er/UVwojeodPTfuELOG"));
-		usuarios.add(new Usuario("JuanAndrei", "$2a$12$NPsOPUUnaekKGbTnemZ3Ve5DTRE/R1KdMNMwi5eE595zUdQ2SDN/S"));
+		usuarios.add(new Usuario("JuanAndres", "$2a$12$NPsOPUUnaekKGbTnemZ3Ve5DTRE/R1KdMNMwi5eE595zUdQ2SDN/S"));
 	}
 	
 	public boolean contraseñaCorrecta(String nombre, String pass) {

@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 @SpringBootApplication
 @Controller
@@ -26,20 +27,51 @@ public class Controlador {
 		return "login";
 	}
 	@PostMapping("/login")
-	public String postLogin(Model model, Usuario usuario, BindingResult br) {
-		if (br.hasErrors()) return "login"; 
+	public String postLogin(Model model, Usuario usuario) {
+		usuario.setContador(usuario.getContador()+1);
 		Usuarios usuarios = new Usuarios();
-		usuario.setAutenticado(usuarios.contraseñaCorrecta(usuario.getNick(), usuario.getPass()));
-		if (usuario.isAutenticado()) return "index";
+		boolean autenticado = usuarios.contraseñaCorrecta(usuario.getNick(), usuario.getPass());
+		usuario.setAutenticado(autenticado);
+		
+		if (usuario.isAutenticado()) return "redirect:/pagina1";
 
 		return "login";
 		
 	}
-	@GetMapping("/")
-	public String inicio(Model model, Usuario usuario, BindingResult bindingResult) {
+	
+	@GetMapping("/pagina1")
+	public String pagina1(Model model, Usuario usuario, SessionStatus session) {
 		model.addAttribute("usuario", usuario);
-		if (!usuario.isAutenticado()) return "redirect:/login";
-		return "inicio";
+		if (!usuario.isAutenticado()) {
+			session.setComplete();
+			return "redirect:/login";
+		}
+		return "pagina1";
+	}
+	@GetMapping("/pagina2")
+	public String pagina2(Model model, Usuario usuario, SessionStatus session) {
+		model.addAttribute("usuario", usuario);
+		if (!usuario.isAutenticado()) {
+			session.setComplete();
+			return "redirect:/login";
+		}
+		return "pagina2";
+	}
+	
+	@GetMapping("/")
+	public String inicio(Model model, Usuario usuario, SessionStatus session) {
+		model.addAttribute("usuario", usuario);
+		if (!usuario.isAutenticado()) {
+			session.setComplete();
+			return "redirect:/login";
+		}
+		return "redirect:/pagina1";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(SessionStatus status) {
+		status.setComplete();
+		return "redirect:/login";
 	}
 	
 

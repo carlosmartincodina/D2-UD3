@@ -11,10 +11,9 @@
 		<input type="text" name="nick" th:field="*{nick}">
 		<br>
 		<label for="pass">Contraseña: </label>
-		<input type="text" name="pass" th:field="*{pass}">
+		<input type="password" name="pass" th:field="*{pass}">
 		<br>
-		<p th:if="${#fields.hasErrors('pass')" th:errors="*{pass}"></p>
-		<p th:if="${#fields.hasErrors('nick')" th:errors="*{nick}"></p>
+		<p th:if="*{autenticado != true && contador > 0} " th:text="|Usuario o contraseña incorrectos|"></p>
 		<br>
 		<button type="submit">Enviar</button>
 	</form>
