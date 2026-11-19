@@ -27,14 +27,14 @@ public class Controlador {
 		return "login";
 	}
 	@PostMapping("/login")
-	public String postLogin(Model model, Usuario usuario) {
+	public String postLogin(Model model, Usuario usuario, SessionStatus session) {
 		usuario.setContador(usuario.getContador()+1);
 		Usuarios usuarios = new Usuarios();
 		boolean autenticado = usuarios.contraseñaCorrecta(usuario.getNick(), usuario.getPass());
 		usuario.setAutenticado(autenticado);
 		
 		if (usuario.isAutenticado()) return "redirect:/pagina1";
-
+		session.setComplete();
 		return "login";
 		
 	}

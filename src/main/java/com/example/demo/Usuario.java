@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import jakarta.validation.constraints.NotEmpty;
-
 public class Usuario {
 
 	private String nick;
