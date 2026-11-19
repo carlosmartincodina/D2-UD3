@@ -1,4 +1,4 @@
-package com.example.demo;
+package org.goya.daw2.dwes.d2ud3;
 
 import java.util.ArrayList;
 
@@ -24,6 +24,9 @@ public class Usuarios {
 			}
 		}
 		if (hash == null) return false;
-		return BCrypt.checkpw(pass,hash);
+		boolean autenticado = BCrypt.checkpw(pass,hash);
+		nombre = null;
+		pass = null;
+		return autenticado;
 	}
 }

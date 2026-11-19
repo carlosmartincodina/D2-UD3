@@ -1,4 +1,4 @@
-package com.example.demo;
+package org.goya.daw2.dwes.d2ud3;
 
 public class Usuario {
 

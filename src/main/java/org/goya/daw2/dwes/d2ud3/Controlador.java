@@ -1,4 +1,4 @@
-package com.example.demo;
+package org.goya.daw2.dwes.d2ud3;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,26 +19,24 @@ public class Controlador {
 		SpringApplication.run(Controlador.class, args);
 	}
 	
-	
 	@GetMapping("/login")
-	public String login(Model model) {
-		Usuario usuario = new Usuario();
+	public String login(Model model, Usuario usuario) {
+		if (usuario.isAutenticado()) return "redirect:/";
 		model.addAttribute("usuario", usuario);
 		return "login";
 	}
 	@PostMapping("/login")
 	public String postLogin(Model model, Usuario usuario, SessionStatus session) {
+		if (usuario.isAutenticado()) return "redirect:/pagina1";
 		usuario.setContador(usuario.getContador()+1);
 		Usuarios usuarios = new Usuarios();
 		boolean autenticado = usuarios.contraseñaCorrecta(usuario.getNick(), usuario.getPass());
 		usuario.setAutenticado(autenticado);
-		
-		if (usuario.isAutenticado()) return "redirect:/pagina1";
+		if (usuario.isAutenticado()) return "redirect:/";
 		//En caso de que el usuario falle con la autenticación, se limpia la sesión
 		//para que no aparezca la JSESSIONID en la cookie.
 		session.setComplete();
 		return "login";
-		
 	}
 	
 	@GetMapping("/pagina1")
@@ -70,7 +68,7 @@ public class Controlador {
 			session.setComplete();
 			return "redirect:/login";
 		}
-		return "redirect:/pagina1";
+		return "index";
 	}
 	
 	@GetMapping("/logout")
