@@ -34,6 +34,8 @@ public class Controlador {
 		usuario.setAutenticado(autenticado);
 		
 		if (usuario.isAutenticado()) return "redirect:/pagina1";
+		//En caso de que el usuario falle con la autenticación, se limpia la sesión
+		//para que no aparezca la JSESSIONID en la cookie.
 		session.setComplete();
 		return "login";
 		
@@ -41,7 +43,8 @@ public class Controlador {
 	
 	@GetMapping("/pagina1")
 	public String pagina1(Model model, Usuario usuario, SessionStatus session) {
-		model.addAttribute("usuario", usuario);
+		//En caso de que el usuario quiera acceder a la página 1 y no esté autenticado,
+		//se limpia esa sesión para que no aparezca la JSESSIONID en la cookie.
 		if (!usuario.isAutenticado()) {
 			session.setComplete();
 			return "redirect:/login";
@@ -50,7 +53,8 @@ public class Controlador {
 	}
 	@GetMapping("/pagina2")
 	public String pagina2(Model model, Usuario usuario, SessionStatus session) {
-		model.addAttribute("usuario", usuario);
+		//En caso de que el usuario quiera acceder a la página 1 y no esté autenticado,
+		//se limpia esa sesión para que no aparezca la JSESSIONID en la cookie.
 		if (!usuario.isAutenticado()) {
 			session.setComplete();
 			return "redirect:/login";
@@ -60,7 +64,8 @@ public class Controlador {
 	
 	@GetMapping("/")
 	public String inicio(Model model, Usuario usuario, SessionStatus session) {
-		model.addAttribute("usuario", usuario);
+		//En caso de que el usuario quiera acceder a la página 1 y no esté autenticado,
+		//se limpia esa sesión para que no aparezca la JSESSIONID en la cookie.
 		if (!usuario.isAutenticado()) {
 			session.setComplete();
 			return "redirect:/login";
